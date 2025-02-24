@@ -10,12 +10,54 @@ Modify the number of repetitions in the simulation to 100 (from the original 100
 
 Alter the code so that it is reproducible. Describe the changes you made to the code and how they affected the reproducibility of the script file. The output does not need to match Whitby’s original blogpost/graphs, it just needs to produce the same output when run multiple times
 
-# Author: YOUR NAME
+# Author: Omer Khan
 
 ```
 Please write your explanation here...
 
-```
+Understanding the Simulation and Sampling Process
+
+This simulation models how infections spread and are traced among individuals attending two types of events: weddings and brunches. It follows a multi-stage sampling approach to assign infections, trace primary contacts, and implement secondary tracing.
+
+1. Infection Assignment (Random Sampling Without Replacement)
+The population consists of 1000 individuals, with 200 attending weddings and 800 attending brunches.
+
+10% of the population (100 individuals) is randomly infected.
+Every individual has an equal chance of being infected, but once selected, they cannot be chosen again.
+This step represents the initial spread of infection in a randomized way.
+2. Primary Contact Tracing (Probability-Based Selection)
+Once infections are assigned, the tracing process begins:
+
+Each infected person has a 20% chance of being successfully traced.
+This probability-based selection mirrors real-world contact tracing efforts, where only some infected individuals are identified.
+The outcome of this stage varies due to randomness, meaning different runs of the simulation may produce slightly different results.
+3. Secondary Contact Tracing (Rule-Based Selection)
+Secondary contact tracing follows a deterministic approach rather than random selection:
+
+The number of traced infections is counted per event type (wedding/brunch).
+If at least two infections were traced in a specific event, all infected individuals at that event are automatically traced.
+This step introduces bias, as it disproportionately increases the number of infections traced to weddings, making them appear more infectious than they actually are.
+Comparing with the Blog’s Approach
+
+The methodology in the blog and this simulation are almost identical, except for the number of iterations.
+The blog runs 50,000 iterations, producing a smoother and more precise distribution, while this simulation runs 1000 iterations.
+Despite this difference, both methods highlight the same bias in tracing results.
+Effect of Reducing Runs from 1000 to 100
+
+Running the simulation only 100 times increases variability in results.
+Fewer runs mean each trial has more influence on the overall distribution, making patterns less stable and noisier.
+A higher number of iterations produces more reliable and consistent results.
+The Role of Random Seed in Reproducibility
+
+Without a fixed random seed, results will vary each time the code runs, as different random numbers are generated.
+Setting a random seed ensures consistency, making it possible to reproduce the same results across multiple runs.
+This is particularly useful for debugging and comparing outcomes.
+Key Takeaways
+
+Multi-Stage Sampling: The simulation involves random infection assignment, probability-based primary tracing, and rule-based secondary tracing.
+Tracing Bias: Secondary contact tracing overestimates infections from weddings, creating a misleading impression.
+Effect of Iterations: More iterations produce a smoother and more accurate representation of trends.
+Reproducibility: A fixed random seed ensures consistent results across different runs.
 
 
 ## Criteria
